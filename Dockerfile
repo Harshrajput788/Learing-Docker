@@ -1,13 +1,11 @@
-FROM ubuntu
+FROM node:22
 
-RUN apt-get update 
-RUN apt-get install nodejs
-RUN apt-get upgrade -y 
+WORKDIR /app
 
-COPY package.json package.json 
-COPY package-lock.json package-lock.json
-COPY index.js index.js
+COPY package*.json ./
 
-RUN npm intall
+RUN npm install
 
-ENTRYPOINT [ "node","index.js"]
+COPY . .
+
+ENTRYPOINT ["node", "index.js"]
